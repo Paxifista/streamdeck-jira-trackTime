@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../css/sdpi.css" />
+    <link rel="stylesheet" href="../css/sdpi.components.css" />
+    <style>
+        .sdpi-item-group {
+            margin-bottom: 20px;
+        }
+
+        .search-results {
+            display: none;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            background: #1f1f1f;
+            margin-top: 5px;
+            border-radius: 3px;
+        }
+
+        .search-results.visible {
+            display: block;
+        }
+
+        .search-result-item {
+            padding: 8px 12px;
+            cursor: pointer;
+            border-bottom: 1px solid #333;
+            transition: background-color 0.2s;
+        }
+
+        .search-result-item:hover {
+            background-color: #2a5cdb;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .current-selection {
+            padding: 10px;
+            background-color: #333;
+            border: 1px solid #2a5cdb;
+            border-radius: 3px;
+            margin-top: 5px;
+            font-size: 12px;
+        }
+
+        .loading {
+            font-size: 12px;
+            color: #999;
+            font-style: italic;
+        }
+
+        .timer-display {
+            background-color: #1a1a1a;
+            border: 2px solid #2a5cdb;
+            border-radius: 5px;
+            padding: 15px;
+            text-align: center;
+            margin: 10px 0;
+            font-family: monospace;
+        }
+
+        .timer-value {
+            font-size: 24px;
+            color: #00ff00;
+            font-weight: bold;
+        }
+
+        .timer-status {
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="sdpi-wrapper">
+        <div class="sdpi-item-group">
+            <div class="sdpi-item" id="auth"></div>
+            <div class="sdpi-item" id="icon"></div>
+        </div>
+
+        <!-- Issue Search Section -->
+        <fieldset class="sdpi-item-group">
+            <legend>Issue Search</legend>
+
+            <div class="sdpi-item input-group">
+                <label for="issue-search">Search Issues:</label>
+                <input 
+                    type="text" 
+                    id="issue-search" 
+                    placeholder="e.g., project = ENV"
+                    maxlength="100"
+                />
+                <div id="issue-search-results" class="search-results"></div>
+            </div>
+
+            <div id="selected-issue" class="current-selection" style="display: none;">
+                <strong>Selected Issue:</strong>
+                <div id="selected-issue-text"></div>
+            </div>
+        </fieldset>
+
+        <!-- Subtask Selection Section -->
+        <fieldset class="sdpi-item-group">
+            <legend>Subtask Selection</legend>
+
+            <div class="sdpi-item">
+                <label for="subtask-select">Select Subtask (Optional):</label>
+                <select id="subtask-select" style="display: none;">
+                    <option value="">No Subtask</option>
+                </select>
+                <div id="no-subtasks-message" class="loading">
+                    (No subtasks available. Time will be logged to the main issue.)
+                </div>
+            </div>
+
+            <div id="selected-subtask" class="current-selection" style="display: none;">
+                <strong>Selected Subtask:</strong>
+                <div id="selected-subtask-text"></div>
+            </div>
+        </fieldset>
+
+        <!-- Timer Display Section -->
+        <fieldset class="sdpi-item-group">
+            <legend>Timer Status</legend>
+            <div class="timer-display">
+                <div class="timer-value" id="timer-display">00:00</div>
+                <div class="timer-status" id="timer-status">Ready to start</div>
+            </div>
+        </fieldset>
+    </div>
+
+    <script src="js/TrackTime.js"></script>
+</body>
+</html>
