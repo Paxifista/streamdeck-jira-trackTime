@@ -120,6 +120,35 @@ export interface ConfluenceTasksSettings extends CommonSettings {
 }
 
 /**
+ * Settings used by the Track Time action.
+ */
+export interface TrackTimeSettings extends CommonSettings {
+  /**
+   * The selected Jira issue key (e.g., "ENV-234").
+   */
+  issueKey: string;
+
+  /**
+   * The selected Jira subtask key (e.g., "ENV-240").
+   * 
+   * If provided, time will be logged to this subtask instead of the main issue.
+   */
+  subtaskKey?: string;
+
+  /**
+   * The display name of the selected subtask.
+   */
+  subtaskName?: string;
+
+  /**
+   * Persisted timer state as a JSON string.
+   * 
+   * Used to restore running timers if Stream Deck restarts.
+   */
+  timerState?: string;
+}
+
+/**
  * Settings used by actions that connect to Jira Cloud Platform.
  * 
  * These are actions that require the use of a cloud ID.
